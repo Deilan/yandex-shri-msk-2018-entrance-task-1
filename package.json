@@ -9,13 +9,23 @@
     "node": ">=8.4.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint": "semistandard",
     "reset-db": "rm -f ./db.sqlite3 && node create-mock-data.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "ci:travis": "npm run lint && npm test",
+    "precommit": "lint-staged && npm run lint"
+  },
+  "lint-staged": {
+    "*.js": [
+      "semistandard --fix",
+      "git add"
+    ]
   },
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.15.4",
+    "express-blank-favicon": "^1.0.1",
     "express-graphql": "^0.6.11",
     "graphql": "^0.11.1",
     "graphql-date": "^1.0.3",
@@ -24,7 +34,11 @@
     "sqlite3": "^3.1.9"
   },
   "devDependencies": {
+    "husky": "^0.14.3",
+    "jest": "^22.0.4",
+    "lint-staged": "^6.0.0",
     "nodemon": "^1.12.5",
-    "semistandard": "^11.0.0"
+    "semistandard": "^11.0.0",
+    "supertest": "^3.0.0"
   }
 }

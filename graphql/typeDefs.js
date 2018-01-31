@@ -6,16 +6,13 @@ type User {
     login: String!
     homeFloor: Int
     avatarUrl: String!
+    events: [Event]
 }
 
 input UserInput {
     login: String!
     homeFloor: Int
-}
-
-type UserRoom {
-    id: ID!
-    title: String!
+    avatarUrl: String
 }
 
 type Room {
@@ -23,6 +20,7 @@ type Room {
     title: String!
     capacity: Int!
     floor: Int!
+    events: [Event]
 }
 
 input RoomInput {
@@ -66,10 +64,11 @@ type Mutation {
 
   createEvent(input: EventInput!, usersIds: [ID], roomId: ID!): Event
   updateEvent(id: ID!, input: EventInput!): Event
-  removeUserFromEvent(id: ID!, userId: ID!): Event
-  addUserToEvent(id: ID!, userId: ID!): Event
-  changeEventRoom(id: ID!, roomId: ID!): Event
   removeEvent(id: ID!): Event
+  addUserToEvent(id: ID!, userId: ID!): Event
+  setUsersOfEvent(id: ID!, usersIds: [ID]): Event
+  changeEventRoom(id: ID!, roomId: ID!): Event
+  removeUserFromEvent(id: ID!, userId: ID!): Event
 }
 
 union SearchResult = User | Event | Room
