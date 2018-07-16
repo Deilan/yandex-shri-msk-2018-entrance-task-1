@@ -11,10 +11,22 @@ module.exports = function resolvers () {
 
     Event: {
       users (event) {
-        event.getUsers();
+        return event.getUsers();
       },
       room (event) {
-        event.getRoom();
+        return event.getRoom();
+      }
+    },
+
+    Room: {
+      events (room) {
+        return room.getEvents();
+      }
+    },
+
+    User: {
+      events (user) {
+        return user.getEvents();
       }
     },
 
